@@ -1,0 +1,5 @@
+/.idea
+
+# Project exclude paths
+/frontend/node_modules/
+/frontend/node_modules/karma/config.tpl.js
