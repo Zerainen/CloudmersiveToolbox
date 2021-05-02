@@ -35,7 +35,7 @@ export class HistoryComponent implements OnInit {
   }
 
   addPictureWithDescription(body: FormData): void {
-    this.pictureDescriptionService.createPictureWithDescription(body).subscribe();
+    this.pictureDescriptionService.createPictureWithDescription(body).subscribe(() => this.selectedFile = null);
   }
 
   deletePictureWithDescription(picture: PictureWithDescription): void {
