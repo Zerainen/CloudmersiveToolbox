@@ -14,11 +14,12 @@ import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HistoryComponent,
-    PictureDescriptionCardComponent
-  ],
+    declarations: [
+        AppComponent,
+        HistoryComponent,
+        PictureDescriptionCardComponent,
+        PictureDescriptionCardComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

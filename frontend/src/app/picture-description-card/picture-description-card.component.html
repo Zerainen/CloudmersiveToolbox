@@ -1,0 +1,14 @@
+<mat-card class="card">
+  <img mat-card-image [src]="formatImage(pictureWithDescription.image)">
+  <mat-card-content>
+    <div>
+      <h2>Generated Description</h2>
+      {{pictureWithDescription.description}}
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="deleteContainer">
+    <button mat-button (click)="deletePicture(pictureWithDescription)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

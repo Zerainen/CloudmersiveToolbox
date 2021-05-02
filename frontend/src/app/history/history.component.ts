@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PictureDescriptionService} from '../services/picture-description.service';
 import {PictureWithDescription} from '../models/picture-with-description';
-import {Form} from "@angular/forms";
 
 @Component({
   selector: 'app-history',
