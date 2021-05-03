@@ -11,13 +11,20 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {HttpRequestInterceptor} from "./http-request.interceptor";
+
+/** Http interceptor providers in outside-in order */
+export const httpInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
+];
+
 
 @NgModule({
     declarations: [
         AppComponent,
         HistoryComponent,
-        PictureDescriptionCardComponent,
         PictureDescriptionCardComponent
     ],
   imports: [
@@ -29,9 +36,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatGridListModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

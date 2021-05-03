@@ -1,13 +1,20 @@
 <input #fileInput class="input" type="file" (change)="onFileSelected($event)">
 
 <div class="containerForNewPictures">
-  <div *ngIf="selectedFile == null">
+  <div *ngIf="selectedFile == null && loading === false">
     <button mat-mini-fab color="primary" (click)="fileInput.click()">
       <mat-icon>add</mat-icon>
     </button>
   </div>
 
-  <mat-card class="card" *ngIf="selectedFile">
+  <div *ngIf="loading">
+    <mat-progress-spinner
+      color="primary"
+      mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+
+  <mat-card class="card" *ngIf="selectedFile && loading === false">
     <img mat-card-image [src]="selectedURL">
     <mat-card-content>
       <div>

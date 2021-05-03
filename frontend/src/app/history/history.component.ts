@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {PictureDescriptionService} from '../services/picture-description.service';
 import {PictureWithDescription} from '../models/picture-with-description';
+import {LoadingService} from "../services/loading.service";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-history',
@@ -12,11 +14,25 @@ export class HistoryComponent implements OnInit {
   pictures: PictureWithDescription[];
   selectedFile: File = null;
   selectedURL: string | ArrayBuffer;
+  loading: boolean
 
-  constructor(private pictureDescriptionService: PictureDescriptionService) { }
+  constructor(private pictureDescriptionService: PictureDescriptionService, private loadingService: LoadingService) { }
 
   ngOnInit(): void {
+    this.listenToLoading();
     this.getPicturesWithDescription();
+  }
+
+  /**
+   * Listen to the loadingSub property in the LoadingService class. This drives the
+   * display of the loading spinner.
+   */
+  listenToLoading(): void {
+    this.loadingService.loadingSub
+      .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
+      .subscribe((loading) => {
+        this.loading = loading;
+      });
   }
 
   onFileSelected(event) {
@@ -51,5 +67,7 @@ export class HistoryComponent implements OnInit {
         this.addPictureWithDescription(formData);
       }
     );
+    // formData.append("description", "lolXD");
+    // this.addPictureWithDescription(formData);
   }
 }
